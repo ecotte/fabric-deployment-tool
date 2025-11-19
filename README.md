@@ -30,17 +30,17 @@ fabric-deployment-tool/
 ├── pyproject.toml
 ├── requirements-dev.txt
 ├── src/
-│   └── fabric_deployment_tool/
-│       ├── __init__.py
-│       ├── _fab_cli.py
-│       ├── _fab_item_management.py
-│       ├── _git.py
-│       ├── _util.py
-│       ├── cli.py
-│       └── deployment.py
-└── tests/
-	├── test_cli.py
-	└── test_deployment.py
+│   ├── fabric_deployment_tool/
+│   │   ├── __init__.py
+│   │   ├── _fab_cli.py
+│   │   ├── _fab_item_management.py
+│   │   ├── _git.py
+│   │   └── _util.py
+│   └── fabric_deployment_tool.egg-info/
+├── tests/
+│   ├── test_cli.py
+│   └── test_deployment.py
+└── dist/                       # Populated after running `python -m build`
 ```
 
 Quick Start
@@ -48,19 +48,19 @@ Quick Start
 1. **Install dev dependencies**
 
 	```powershell
-	C:/Users/edcotte/AppData/Local/Microsoft/WindowsApps/python3.12.exe -m pip install -e .[dev]
+	python -m pip install -e .[dev]
 	```
 
 2. **Run tests + coverage**
 
 	```powershell
-	C:/Users/edcotte/AppData/Local/Microsoft/WindowsApps/python3.12.exe -m pytest
+	python -m pytest
 	```
 
 3. **Build wheel + sdist** (requires the `build` extra already included in `dev`)
 
 	```powershell
-	C:/Users/edcotte/AppData/Local/Microsoft/WindowsApps/python3.12.exe -m build
+	python -m build
 	```
 
 4. **Inspect artifacts**
@@ -74,18 +74,19 @@ table for a SPDX string (for example `"MIT"`) when you are ready to publish.
 
 Runtime Modules
 ---------------
+- `__init__.py`: aggregates mixins (`fdtCLU`, `fdtGit`, `fdtUtils`, `fdtItemManagement`) into the
+	`FabDeplmentTool` orchestrator and wires Fabric authentication via `notebookutils`.
 - `_fab_cli.py`: shared helpers for invoking Microsoft Fabric CLI commands.
-- `_fab_item_management.py`: example routines that orchestrate Fabric items.
-- `_git.py`: placeholder Git integration surface for deployment pipelines.
+- `_fab_item_management.py`: routines that orchestrate Fabric items defined in
+	`config/deployment_order.json`.
+- `_git.py`: GitHub download helpers for fetching source/config bundles as zip files.
 - `_util.py`: Fabric-specific utilities (ID lookups, temp extraction, mapping replacements).
-- `deployment.py`: sample deployment facade returning summaries for CLI output.
-- `cli.py`: Typer application entry point registered as the `fabric-deployment-tool` script.
 
 Using the CLI
 -------------
 
 ```powershell
-C:/Users/edcotte/AppData/Local/Microsoft/WindowsApps/python3.12.exe -m fabric_deployment_tool run ./sample-project
+python -m fabric_deployment_tool run ./sample-project
 ```
 
 - Use `--version` or `-v` to print the package version.

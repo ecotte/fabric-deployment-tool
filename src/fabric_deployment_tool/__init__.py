@@ -14,7 +14,7 @@ import notebookutils
 
 __all__ = [
     "__version__",
-    "FabDeplmentTool",
+    "FabDeploymentTool",
 ]
 
 try:
@@ -23,7 +23,7 @@ except Exception:  # pragma: no cover
     __version__ = "0.0.0"
 
 
-class FabDeplmentTool(fdtCLU, fdtGit, fdtUtils, fdtItemManagement):
+class FabDeploymentTool(fdtCLU, fdtGit, fdtUtils, fdtItemManagement):
     src_workspace_id = ""
     src_workspace_name = ""
     trg_workspace_id = ""
