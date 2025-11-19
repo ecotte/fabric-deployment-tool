@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "fabric-deployment-tool"
-version = "0.1.3"
+version = "0.1.4"
 description = "Project for building distributable Fabric deployment tooling wheels."
 readme = "README.md"
 authors = [{ name = "Edgar Cotte", email = "e@e.com" }]

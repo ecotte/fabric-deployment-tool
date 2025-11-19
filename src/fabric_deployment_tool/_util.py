@@ -116,7 +116,7 @@ class fdtUtils:
                 name = row['Display Name']
                 sku = row['Sku']
                 name = f"{name.replace(' ','')}-{sku}"
-                name = name.replace('_', '-')
+                name = name.replace('_', '')
                 filtered_data = list(filter(lambda table: table.get("properties",{}).get("capacityId") == capacity_id, sources))
                 if len(filtered_data) > 0:
                     new_source = filtered_data.pop()
