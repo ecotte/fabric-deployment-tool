@@ -91,15 +91,15 @@ class FabDeploymentTool(fdtCLU, fdtGit, fdtUtils, fdtItemManagement):
             self.run_fab_command(
                 f"mkdir {workspace_name}.Workspace -P capacityname={capacity_name}.Capacity"
             )
-            print(f"New Workspace Create")
+            print(f"New Workspace Create", flush=True)
 
         self.src_workspace_name = "Workspace.src"
         self.src_workspace_id = self.get_id_by_name(self.src_workspace_name)
         self.trg_workspace_id = self.fab_get_workspace_id(f"{workspace_name}.Workspace")
         self.trg_workspace_name = f"{workspace_name}.Workspace"
 
-        print(f"Target Workspace Id: {self.trg_workspace_id}")
-        print(f"Target Workspace Name: {self.trg_workspace_name}")
+        print(f"Target Workspace Id: {self.trg_workspace_id}", flush=True)
+        print(f"Target Workspace Name: {self.trg_workspace_name}", flush=True)
 
         self.mapping_table.append(
             {
@@ -189,7 +189,7 @@ class FabDeploymentTool(fdtCLU, fdtGit, fdtUtils, fdtItemManagement):
             cli_parameter = cli_parameter + " --format .py"
         elif ".DataPipeline" in name:
             self.replace_pipeline_parameter(tmp_path, it.get("parameters", []))
-            self.replace_pipeline_activities(tmp_path, it.get("acitivities", []))
+            self.replace_pipeline_activities(tmp_path, it.get("activities", []))
         elif ".SemanticModel" in name:
             self.replace_ids_in_folder(tmp_path, self.mapping_table)
         elif ".KQLDashboard" in name:
@@ -200,10 +200,6 @@ class FabDeploymentTool(fdtCLU, fdtGit, fdtUtils, fdtItemManagement):
             self.replace_pbi_report_definition(tmp_path, it.get("datasource"))
         elif ".VariableLibrary" in name:
             self.add_variable_library_default(tmp_path, it.get("variables"))
-
-        print("", flush=True)
-        print("#############################################", flush=True)
-        print(f"Deploying {name}", flush=True)
 
         self.run_fab_command(
             f"import  /{self.trg_workspace_name}/{name} -i {tmp_path} -f {cli_parameter} ",

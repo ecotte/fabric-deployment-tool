@@ -145,7 +145,7 @@ class fdtItemManagement:
                     elif ".Eventhouse" in parameter["source"]:
                         pipeline_parameter["defaultValue"] = (
                             self.get_mapping_table_new_from_type_item(
-                                "kustoQueryUri",
+                                "Kusto Query Uri",
                                 (
                                     parameter["source"]
                                     if self.eventhouse_name == ""
@@ -167,7 +167,7 @@ class fdtItemManagement:
                     elif ".Eventhouse" in parameter["source"]:
                         pipeline_parameter["defaultValue"] = (
                             self.get_mapping_table_new_from_type_item(
-                                "kustoIngestUri",
+                                "Kusto Ingest Uri",
                                 (
                                     parameter["source"]
                                     if self.eventhouse_name == ""
@@ -186,6 +186,7 @@ class fdtItemManagement:
                     pipeline_parameter["defaultValue"] = self.pipeline_parameters[
                         parameter["source"]
                     ]
+
         with open(property_file, "w", encoding="utf-8") as file:
             json.dump(content, file, indent=4)
 
